@@ -6,7 +6,7 @@
 /*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:42:35 by zweng             #+#    #+#             */
-/*   Updated: 2019/01/12 13:25:32 by zweng            ###   ########.fr       */
+/*   Updated: 2019/01/12 14:46:46 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ Projectile	&Projectile::operator=(const Projectile &obj)
 }
 
 Projectile::~Projectile(void) {}
+		
+void	Projectile::move(void)
+{
+	this->posX += this->getSpeed();
+}
 
 int		Projectile::getSpeed(void) const
 {
@@ -49,4 +54,14 @@ int		Projectile::getX(void) const
 int		Projectile::getY(void) const
 {
 	return (this->posY);
+}
+
+void	Projectile::setX(int x)
+{
+	this->posX = x;
+}
+
+void	Projectile::setY(int y)
+{
+	this->posY = y;
 }
