@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:26:45 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 11:27:31 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 12:08:55 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,14 @@
 #include "Projectile.hpp"
 #include "Agent.hpp"
 
-class World {
+class Projectile {
     public :
-        World(std::string name, size_t health, Projectile *_projectile);
-        ~World();
+        ~Projectile();
     protected:
-        std::string     **_grid;
-        int             playerY;
-        size_t          replay(bool r);
+        int dir_speed;
+        int posX;
+        int posY;
     private:
-        World();
+        Projectile();
 };
 #endif
