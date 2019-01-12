@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:10:50 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 12:04:20 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 14:49:57 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,20 @@
 # define WORLD_HPP
 
 #include <string>
-#include "Projectile.hpp"
-#include "Agent.hpp"
-#include "Player.hpp"
-#include "Enemy.hpp"
-#include "Mesh.hpp"
+
+#define W_Y 300
+#define W_X 400
 
 class World {
     public :
-        World(std::string name, size_t health, Projectile *_projectile);
+        World();
         ~World();
-        void            getAgentPosition(Player& player);
-        void            getAgentPosition(Enemy& enemy);
+        // void            getAgentPosition(Player& player);
+        // void            getAgentPosition(Enemy& enemy);
         // void            getAgentPosition(Mesh& mesh);
     protected:
         int             **_grid;
         int             playerY;
     private:
-        World();
 };
 #endif

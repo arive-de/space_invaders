@@ -6,17 +6,25 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:59:49 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 10:00:21 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 14:49:43 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-#define WEAPON_HPP
+#include "../includes/Enemy.hpp"
 
-#include "Agent.hpp"
+Enemy::Enemy(std::string name, World& world) : Agent(name, 1, world)
+{
+    this->_x = W_X;
+    this->_y = rand() % W_Y;
+    this->_projecSpeed = -4;
+}
 
-class Weapon {
+void Enemy::takeDamage(size_t dmg)
+{
+    std::string buf;
 
-};
-
-#endif
+    if (dmg < this->_health)
+        this->_health -= dmg;
+    else
+        delete this;
+}
