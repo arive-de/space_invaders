@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:56:24 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 18:29:04 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 18:37:19 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 #include <string>
 #include <iostream>
 #include "Projectile.hpp"
+
+#define W_Y 40
+#define W_X 150
 
 class Agent {
     public :
