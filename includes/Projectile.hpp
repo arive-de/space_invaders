@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Projectile.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zweng <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/12 11:26:45 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 12:08:55 by fmaury           ###   ########.fr       */
+/*   Created: 2019/01/12 12:42:50 by zweng             #+#    #+#             */
+/*   Updated: 2019/01/12 13:25:38 by zweng            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,24 @@
 # define PROJECTILE_HPP
 
 #include <string>
-#include "Projectile.hpp"
-#include "Agent.hpp"
 
 class Projectile {
-    public :
+    public:
+		Projectile(int, int);
+		Projectile(int, int, int);
+		Projectile(const Projectile &);
+		Projectile	&operator=(const Projectile &);
         ~Projectile();
+
+		int		getSpeed(void) const;
+		int		getX(void) const;
+		int		getY(void) const;
+
     protected:
         int dir_speed;
         int posX;
         int posY;
+
     private:
         Projectile();
 };
