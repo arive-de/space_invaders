@@ -64,8 +64,4 @@ void	Projectile::setX(int x)
 void	Projectile::setY(int y)
 {
 	this->posY = y;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 367fb248ed6a418333c8f1f9ac200867e12abd2f
