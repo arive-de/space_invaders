@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:42:35 by zweng             #+#    #+#             */
-/*   Updated: 2019/01/12 14:59:31 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 15:03:49 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,4 @@ void	Projectile::setX(int x)
 void	Projectile::setY(int y)
 {
 	this->posY = y;
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 367fb248ed6a418333c8f1f9ac200867e12abd2f

@@ -6,13 +6,13 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:14 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 14:46:27 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/12 15:43:19 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Player.hpp"
 
-Player::Player(std::string name, World& world) : Agent(name, 5, world)
+Player::Player(std::string name) : Agent(name, 5)
 {
     this->_x = 0;
     this->_y = 5;
