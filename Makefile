@@ -1,6 +1,8 @@
 NAME		= 	ft_retro
 
-SRCS		= 	Agent.cpp\
+INCS		= 	includes
+
+SRC		= 	Agent.cpp\
 				Enemy.cpp\
 				Mesh.cpp \
 				Player.cpp\
@@ -8,6 +10,8 @@ SRCS		= 	Agent.cpp\
 				Weapon.cpp\
 				World.cpp\
 				main.cpp
+
+SRCS			= $(addprefix srcs/, $(SRC))
 
 OBJS		= 	$(patsubst srcs/%.cpp,objs/%.o,$(SRCS))
 
@@ -18,7 +22,7 @@ CFLAGS		= 	-Wall -Wextra -Werror
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			@ $(CC) $(CFLAGS) -o $@ $^
+			@ $(CC) -I $(INCS) $(CFLAGS) -o $@ $^
 			@ echo "\n\033[92m---> project program created ✓\033[0m"
 
 clean:
