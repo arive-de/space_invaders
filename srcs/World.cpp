@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 11:52:29 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 13:02:16 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,21 +93,25 @@ void            World::checkPlayerProjectiles()
             x = this->_player._projectile[i]->getX();
             for (int j = 0; j < NB_ENMY; j++)
             {
-                if (x + 1 == W_X)
+                if (this->_enemy[j])
                 {
-                    delete this->_player._projectile[i];
-                    this->_player._projectile[i] = NULL;
-                    this->_player.decremNbProj();
-                    break ;
-                }
-                else if (y == this->_enemy[j]->getYPosition() && (x == this->_enemy[j]->getXPosition() || x + 1 == this->_enemy[j]->getXPosition()))
-                {
-                    delete this->_player._projectile[i];
-                    this->_player._projectile[i] = NULL;
-                    this->_player.decremNbProj();
-                    delete this->_enemy[j];
-                    this->_enemy[j] = NULL;
-                    break ;
+                    if (x + 1 == W_X)
+                    {
+                        delete this->_player._projectile[i];
+                        this->_player._projectile[i] = NULL;
+                        this->_player.decremNbProj();
+                        break ;
+                    }
+                    else if (y == this->_enemy[j]->getYPosition() && (x == this->_enemy[j]->getXPosition() || x + 1 == this->_enemy[j]->getXPosition()))
+                    {
+                        delete this->_player._projectile[i];
+                        this->_player._projectile[i] = NULL;
+                        this->_player.decremNbProj();
+                        this->_grid[this->_enemy[j]->getYPosition()][this->_enemy[j]->getXPosition()] = '*';
+                        delete this->_enemy[j];
+                        this->_enemy[j] = NULL;
+                        break ;
+                    }
                 }
             }
             if (this->_player._projectile[i]) 

@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:18 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 11:39:44 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 11:55:06 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void Agent::fireProjectile()
             if (!this->_projectile[i])
             {
                 this->_projectile[i] = projectile;
-                break ;
+                this->_nbProjec += 1;
+                return ;
             }
         }
-        this->_nbProjec += 1;
     }
     
 }
