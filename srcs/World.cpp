@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:50:16 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:53:06 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ World::World(Player &player, Spaceship **spaceships, Alien **aliens) : _player(p
             if (this->_aliens[j]->getYPosition() < W_Y && this->_aliens[j]->getXPosition() < W_X)
                 this->_grid[this->_aliens[j]->getYPosition()][this->_aliens[j]->getXPosition()] = this->_aliens[j]->getEnemyChar();
         }
+}
+
+World::~World()
+{
+
 }
 
 void World::checkEnemyProjectiles(Alien **aliens)

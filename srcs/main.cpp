@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 15:47:11 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:52:39 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,12 @@ int main(void) {
 				delwin(win_end);
 			}
             delete world;
-            for (int i = 0; i < NB_ENMY; i++)
-                enemy[i] = new Enemy("Spaceship");
-            world = new World(*player, enemy);
+            for (int i = 0; i < NB_SPACESHIPS; i++)
+        		spaceships[i] = new Spaceship();
+			Alien *aliens[NB_ALIENS];
+    		for (int i = 0; i < NB_ALIENS; i++)
+        		aliens[i] = new Alien();
+    		World *world = new World(*player, spaceships, aliens);
            
         }
         else if (keycode == 'n')
