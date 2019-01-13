@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 11:28:48 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:03:16 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,6 @@ int main(void) {
 	noecho();
     curs_set(0);
 
-	// int		pos_x(1);
-	// int		pos_y(W_Y / 2);
-
 	int		keycode;
 	struct timespec ts;
     std::srand(0);
@@ -81,7 +78,6 @@ int main(void) {
 
 	ts.tv_sec = 0;
 	ts.tv_nsec = 50 * 1000 * 1000;
-	// winsize(&win_y, &win_x);
 
 	WINDOW *win = newwin(40, 150, 0, 0);
 
@@ -105,33 +101,17 @@ int main(void) {
                 sleep(100);
             }
             world->makeTheRules();
-			// wmove(win, pos_y, pos_x);
 			wrefresh(win);
 
 		}
 		if ((keycode = wgetch(win)) == ERR)
 			continue;
 		else if (keycode == 'w')
-		{
-           	// if (!collision(win, pos_y - 1, pos_x))
-           	// 	pos_y--;
                player->decremYPosition();
-        }
         else if (keycode == 's')
-        {
-            // if (!collision(win, pos_y + 1, pos_x))
-			// 	pos_y++;
                player->incremYPosition();
-
-        }
 		else if(keycode == 'e')
-		{
-            player->fireProjectile();
-			// if (!collision(win, pos_y, pos_x - 1))
-            // 	pos_x--;
-            //    player->incremXPosition();
-
-		}
+            player->fireProjectile(player->getYPosition(), player->getXPosition());
 		else if (keycode == 'd')
 		{
 			// if (!collision(win, pos_y, pos_x + 1))

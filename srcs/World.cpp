@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 13:02:16 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:35:45 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ World::World(Player &player, Enemy **enemy) : _player(player), _enemy(enemy)
 
 void World::checkEnemyProjectiles()
 {
-    // int x(0);
-    // int y(0);
+    int x(0);
+    int y(0);
 
     for (int i = 0; i < NB_ENMY; i++)
     {
@@ -46,30 +46,34 @@ void World::checkEnemyProjectiles()
                 if (this->_enemy[i]->getXPosition() == this->_player.getXPosition() && this->_enemy[i]->getYPosition() == this->_player.getYPosition())
                 {
                     this->_player.takeDamage(5000);
-                    break;
+                    return ;
                 }
-                // for (int j = 0; j < NB_PROJ; j++)
-                // {
-                //         Projectile *proj = this->_enemy[i]->getProjectile(j);
-                //         y = proj->getY();
-                //         x = proj->getX() - 1;
-                //         if (x == 0)
-                //         {
-                //             delete proj;
-                //             proj = NULL;
-                //         }
-                //         else if (y == this->_player.getYPosition() && x == this->_player.getXPosition())
-                //         {
-                //             this->_player.takeDamage(1);
-                //             delete proj;
-                //             proj = NULL;
-                //         }
-                //         else 
-                //         {
-                //             proj->setX(x);
-                //             this->_grid[y][x] = '-';
-                //         }
-                // }
+                for (int j = 0; j < NB_PROJ; j++)
+                {
+                    if (this->_enemy[i]->_projectile[j])
+                    {
+                        y = this->_enemy[i]->_projectile[j]->getY();
+                        x = this->_enemy[i]->_projectile[j]->getX();
+                        if (y == this->_player.getYPosition() && x - this->_enemy[i]->getProjecSpeed() <= 0)
+                        {
+                            this->_player.takeDamage(5);
+                            this->_enemy[i]->decremNbProj();
+                            delete this->_enemy[i]->_projectile[j];
+                            this->_enemy[i]->_projectile[j] = NULL;
+                        }
+                        else if (x - this->_enemy[i]->getProjecSpeed() <= 0)
+                        {
+                            this->_enemy[i]->decremNbProj();
+                            delete this->_enemy[i]->_projectile[j];
+                            this->_enemy[i]->_projectile[j] = NULL;
+                        }
+                        else 
+                        {
+                            this->_enemy[i]->_projectile[j]->setX(x - this->_enemy[i]->getProjecSpeed());
+                            this->_grid[y][x] = '-';
+                        }
+                    }
+                }
             }
         }
 
@@ -133,10 +137,9 @@ void World::printEnemy()
     for (int i = 0; i < NB_ENMY; i++)
     {
         if (this->_enemy[i] && this->_enemy[i]->getXPosition() < W_X)
-        this->_grid[this->_enemy[i]->getYPosition()][this->_enemy[i]->getXPosition()] = '@';
+            this->_grid[this->_enemy[i]->getYPosition()][this->_enemy[i]->getXPosition()] = '@';
         if (!this->_enemy[i])
             this->_enemy[i] = new Enemy("Spaceship");
-
     }
 }
 
@@ -145,8 +148,15 @@ void World::makeTheRules()
     for (int i = 0; i < W_Y; i++)
         for (int j = 0; j < W_X; j++)
             this->_grid[i][j] = ' ';
-
     this->checkEnemyProjectiles();
     this->checkPlayerProjectiles();
     this->printEnemy();
+    for (int i = 0; i < NB_ENMY; i++)
+    {
+        if (this->_enemy[i] && this->_enemy[i]->getXPosition() < W_X)
+        {
+            if (rand() % 250 == 1)
+            this->_enemy[i]->fireProjectile(this->_enemy[i]->getYPosition(), this->_enemy[i]->getXPosition() - 1);
+        }
+    }
 }

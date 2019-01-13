@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:14 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 10:52:02 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:15:25 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ Player::Player(std::string name) : Agent(name, 5)
 {
     this->_x = 1;
     this->_y = W_Y / 2;
-    this->_projecSpeed = 2;
+    this->_projecSpeed = 1;
 }
 
 Player::~Player()

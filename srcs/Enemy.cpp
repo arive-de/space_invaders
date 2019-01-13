@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:59:49 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 11:07:14 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:15:21 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,7 @@ Enemy::Enemy(std::string name) : Agent(name, 1)
 {
     this->_x = (rand() % W_X) + W_X;
     this->_y = rand() % W_Y;
-    this->_projecSpeed = -4;
-    std::cout << "X: " << this->_x << " Y: " << this->_y << std::endl;
+    this->_projecSpeed = 2;
 }
 
 Enemy::~Enemy()

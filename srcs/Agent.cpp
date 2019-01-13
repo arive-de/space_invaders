@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:18 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 11:55:06 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 14:16:28 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 Agent::Agent(std::string name, size_t health) : _name(name), _health(health)
 {
     this->_nbProjec = 0;
+    for (int i = 0; i < NB_PROJ; i++)
+        this->_projectile[i] = NULL;
 }
 
 Agent::~Agent() 
@@ -35,6 +37,11 @@ int     Agent::getYPosition()
 int     Agent::getHealth()
 {
     return this->_health;
+}
+
+int     Agent::getProjecSpeed()
+{
+    return this->_projecSpeed;
 }
 
 void     Agent::incremXPosition()
@@ -67,11 +74,11 @@ Projectile*  Agent::getProjectile(int i)
     return this->_projectile[i];
 }
 
-void Agent::fireProjectile()
+void Agent::fireProjectile(int y, int x)
 {
     if (this->_nbProjec < NB_PROJ)
     {
-        Projectile *projectile = new Projectile(this->_x, this->_y, this->_projecSpeed);
+        Projectile *projectile = new Projectile(x, y, this->_projecSpeed);
         for (int i = 0; i < NB_PROJ; i++)
         {
             if (!this->_projectile[i])
