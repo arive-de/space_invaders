@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 10:58:38 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 11:28:48 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,9 @@ int main(void) {
                player->incremYPosition();
 
         }
-		else if(keycode == 'a')
+		else if(keycode == 'e')
 		{
+            player->fireProjectile();
 			// if (!collision(win, pos_y, pos_x - 1))
             // 	pos_x--;
             //    player->incremXPosition();

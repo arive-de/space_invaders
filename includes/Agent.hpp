@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:56:24 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 10:53:00 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 11:44:38 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Agent {
         Agent();
         Agent(std::string name, size_t health);
         ~Agent();
-        Projectile* & getProjectile(int i);
+        Projectile*  getProjectile(int i);
         void fireProjectile();
         int  getXPosition();
         int  getYPosition();
@@ -36,13 +36,14 @@ class Agent {
         void  incremYPosition();
         void  decremXPosition();
         void  decremYPosition();
+        void  decremNbProj();
         int   getHealth();
+        Projectile      *_projectile[NB_PROJ];
 
     protected:
         std::string     _name;
         size_t          _health;
         int             _projecSpeed;
-        Projectile      *_projectile[30];
         int             _x;
         int             _y;
         int             _nbProjec;
