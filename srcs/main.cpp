@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:52:39 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 17:44:36 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int main(void) {
 			Alien *aliens[NB_ALIENS];
     		for (int i = 0; i < NB_ALIENS; i++)
         		aliens[i] = new Alien();
-    		World *world = new World(*player, spaceships, aliens);
+    		world = new World(*player, spaceships, aliens);
            
         }
         else if (keycode == 'n')
