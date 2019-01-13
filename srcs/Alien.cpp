@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.cpp                                          :+:      :+:    :+:   */
+/*   Alien.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/12 09:59:49 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:49:58 by fmaury           ###   ########.fr       */
+/*   Created: 2019/01/13 15:43:25 by fmaury            #+#    #+#             */
+/*   Updated: 2019/01/13 15:44:03 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/Enemy.hpp"
+#include "../includes/Alien.hpp"
 
-Enemy::Enemy(std::string name, int health, char enemyChar) : Agent(name, health)
+Alien::Alien() : Enemy("alien", 2, 'A')
 {
-    this->_enemyChar = enemyChar;
     this->_x = (rand() % W_X) + W_X;
     this->_y = rand() % W_Y;
     this->_projecSpeed = 2;
 }
 
-Enemy::~Enemy()
+Alien::~Alien()
 {
  
-}
-
-char Enemy::getEnemyChar()
-{
-    return this->_enemyChar;
-}
-
-void Enemy::takeDamage(int dmg)
-{
-    std::string buf;
-
-    if (dmg < this->_health)
-        this->_health -= dmg;
-    else
-        delete this;
 }

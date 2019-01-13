@@ -6,12 +6,13 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 14:03:16 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 15:47:11 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Player.hpp"
-#include "../includes/Enemy.hpp"
+#include "../includes/Spaceship.hpp"
+#include "../includes/Alien.hpp"
 #include "../includes/World.hpp"
 
 #include <ncurses.h>
@@ -54,10 +55,13 @@ int main(void) {
     int score;
 
     Player *player = new Player("John");
-    Enemy *enemy[NB_ENMY];
-    for (int i = 0; i < NB_ENMY; i++)
-        enemy[i] = new Enemy("Spaceship");
-    World *world = new World(*player, enemy);
+    Spaceship *spaceships[NB_SPACESHIPS];
+    for (int i = 0; i < NB_SPACESHIPS; i++)
+        spaceships[i] = new Spaceship();
+	Alien *aliens[NB_ALIENS];
+    for (int i = 0; i < NB_ALIENS; i++)
+        aliens[i] = new Alien();
+    World *world = new World(*player, spaceships, aliens);
 
     WINDOW *win = newwin(40, 150, 0, 0);
     WINDOW *win_end;

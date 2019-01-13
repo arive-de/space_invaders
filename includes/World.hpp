@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:10:50 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 10:18:22 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:50:20 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <string>
 #include "Player.hpp"
-#include "Enemy.hpp"
+#include "Alien.hpp"
+#include "Spaceship.hpp"
 
 #define W_Y 40
 #define W_X 150
@@ -23,21 +24,22 @@
 class World {
 
     public :
-        World(Player &player, Enemy **enemy);
+        World(Player &player, Spaceship **spaceships, Alien **aliens);
         ~World();
         void            makeTheRules();
-        void            checkEnemyProjectiles();
+        void            checkEnemyProjectiles(Alien **_aliens);
+        void            checkEnemyProjectiles(Spaceship **_spaceships);
         void            checkPlayerProjectiles();
         void            getAgentPosition(Player& player);
         void            getAgentPosition(Enemy& enemy);
         char            getCharGrid(int y, int x);
         void            printEnemy();
 
-
     protected:
         char             _grid[W_Y][W_X];
         Player          &_player;
-        Enemy           **_enemy;
+        Spaceship       **_spaceships;
+        Alien           **_aliens;
 
     private:
 };
