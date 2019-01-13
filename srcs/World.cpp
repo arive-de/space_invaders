@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:53:06 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 18:25:31 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,9 +244,18 @@ void World::printEnemy()
 
 void World::makeTheRules()
 {
+    int num;
     for (int i = 0; i < W_Y; i++)
         for (int j = 0; j < W_X; j++)
             this->_grid[i][j] = ' ';
+
+    for (int j = 0; j < W_X; j++)
+    {
+        num = rand() % 10;
+        for (int i = W_Y - num; i < W_Y; i++)
+            this->_grid[i][j] = '+';
+    }
+
     this->checkEnemyProjectiles(this->_aliens);
     this->checkEnemyProjectiles(this->_spaceships);
     this->checkPlayerProjectiles();
