@@ -1,37 +1,83 @@
-NAME		= 	ft_retro
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: zweng <marvin@42.fr>                       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2017/11/09 18:11:43 by zweng             #+#    #+#              #
+#    Updated: 2019/01/13 18:23:14 by zweng            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-INCS		= 	includes
+CC = clang++
 
-SRC		= 	Agent.cpp\
-				Enemy.cpp\
-				Mesh.cpp \
-				Player.cpp\
-				Projectile.cpp\
-				Weapon.cpp\
-				World.cpp\
-				main.cpp
+# ----- part to change -----
 
-SRCS			= $(addprefix srcs/, $(SRC))
+NAME 			= ft_retro
 
-OBJS		= 	$(patsubst srcs/%.cpp,objs/%.o,$(SRCS))
+HEADER_PATH 	= includes
+SRC_PATH 		= srcs
 
-CC			= 	clang++
-CFLAGS		= 	-Wall -Wextra -Werror
+SRC_NAME		= Agent.cpp\
+				  Alien.cpp\
+				  Enemy.cpp\
+				  Mesh.cpp\
+				  Player.cpp\
+				  Projectile.cpp\
+				  Spaceship.cpp\
+				  Weapon.cpp\
+				  World.cpp\
+				  main.cpp
 
+OBJ_PATH =  obj
+OBJ_NAME =  $(SRC_NAME:.cpp=.o)
+CPPFLAGS = -I$(HEADER_PATH) 
+LIBFLAG = -lncurses
+CFLAGS = -Wall -Wextra -Werror
 
-all:		$(NAME)
+# ----- part automatic -----
+SRCS := $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJS := $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-$(NAME):	$(OBJS)
-			@ $(CC) -I $(INCS) $(CFLAGS) -o $@ $^
-			@ echo "\n\033[92m---> project program created ✓\033[0m"
+# ----- Colors -----
+BLACK:="\033[1;30m"
+RED:="\033[1;31m"
+GREEN:="\033[1;32m"
+CYAN:="\033[1;35m"
+PURPLE:="\033[1;36m"
+WHITE:="\033[1;37m"
+EOC:="\033[0;0m"
+#  # ==================
+
+# ----- part rules -----
+
+all: $(NAME)
+
+$(NAME): $(OBJS)
+	@$(CC) $(OBJS) $(CPPFLAGS)  $(LIBFLAG) -o $@
+	@printf $(GREEN)"$(NAME) Finish linking\n"$(EOC)
+
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.cpp | $(OBJ_PATH)
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ -c $<
+	@printf $(GREEN)"compiling %s\n"$(GREEN) $<
+
+$(OBJ_PATH):
+	@mkdir $(OBJ_PATH) 2> /dev/null
 
 clean:
-			@ /bin/rm -rf objs/
-			@ echo "\033[1;33m---> All .o files cleared\033[0m \033[92m✓\033[0m"
+	@rm -f $(OBJS)
+	@rmdir $(OBJ_PATH) 2> /dev/null || true
+	@printf $(GREEN)"$(NAME) clean\n"$(EOC)
 
-fclean:		clean
-			@ /bin/rm -f $(NAME)
-			@ echo "\n\033[1;33m---> Everything cleared\033[2;00m \033[92m✓\033[0m"
-re : fclean all
+fclean: clean
+	@/bin/rm -f $(NAME)
+	@printf $(GREEN)"$(NAME) fclean\n"$(EOC)
 
-.PHONY: clean, fclean, re
+re: fclean all
+
+norme:
+	@norminette $(SRCS)
+	@norminette $(HEADER_PATH)/*.h
+
+.PHONY: clean fclean all re norme
