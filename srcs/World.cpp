@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 19:36:27 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:43:05 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void World::checkEnemyProjectiles(Alien **aliens)
                 if (aliens[i]->getXPosition() == this->_player.getXPosition() && aliens[i]->getYPosition() == this->_player.getYPosition())
                 {
                     // this->_player.takeDamage(5000);
+                    system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                     this->_player.setHealth(0);
                     return ;
                 }
@@ -120,6 +121,7 @@ void World::checkEnemyProjectiles(BigAlien **aliens)
                 if (aliens[i]->getXPosition() == this->_player.getXPosition() && aliens[i]->getYPosition() == this->_player.getYPosition())
                 {
                     // this->_player.takeDamage(5000);
+                    system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                     this->_player.setHealth(0);
                     return ;
                 }
@@ -176,6 +178,7 @@ void World::checkEnemyProjectiles(Spaceship       **spaceships)
                 if (spaceships[i]->getXPosition() == this->_player.getXPosition() && spaceships[i]->getYPosition() == this->_player.getYPosition())
                 {
                     // this->_player.takeDamage(5000);
+                    system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                     this->_player.setHealth(0);
                     return ;
                 }
@@ -245,6 +248,7 @@ void            World::checkPlayerProjectiles()
                         this->_aliens[j]->setHealth(this->_aliens[j]->getHealth() - 1);
                         if (this->_aliens[j]->getHealth() <= 0)
                         {
+                            system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                             this->_grid[this->_aliens[j]->getYPosition()][this->_aliens[j]->getXPosition()] = '*';
                             delete this->_aliens[j];
                             this->_aliens[j] = NULL;
@@ -272,6 +276,7 @@ void            World::checkPlayerProjectiles()
                         this->_bigaliens[j]->setHealth(this->_bigaliens[j]->getHealth() - 1);
                         if (this->_bigaliens[j]->getHealth() <= 0)
                         {
+                            system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                             this->_grid[this->_bigaliens[j]->getYPosition()][this->_bigaliens[j]->getXPosition()] = '*';
                             delete this->_bigaliens[j];
                             this->_bigaliens[j] = NULL;
@@ -293,6 +298,7 @@ void            World::checkPlayerProjectiles()
                     }
                     else if (y == this->_spaceships[j]->getYPosition() && (x == this->_spaceships[j]->getXPosition() || x + 1 == this->_spaceships[j]->getXPosition()))
                     {
+                        system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/explode.mp3&");
                         delete this->_player._projectile[i];
                         this->_player._projectile[i] = NULL;
                         this->_player.decremNbProj();

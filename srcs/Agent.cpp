@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:18 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:49:23 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:41:22 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ void Agent::fireProjectile(int y, int x)
 {
     if (this->_nbProjec < NB_PROJ)
     {
+        system("killall afplay 2&>/dev/null >/dev/null\n afplay ./sounds/shotfire.mp3&");
         Projectile *projectile = new Projectile(x, y, this->_projecSpeed);
         for (int i = 0; i < NB_PROJ; i++)
         {
