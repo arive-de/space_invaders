@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 19:43:05 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 20:05:59 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,21 @@ World::World(Player &player, Spaceship **spaceships, Alien **aliens, BigAlien **
 
 World::~World()
 {
-
+    for (int j = 0; j < NB_SPACESHIPS; j++)
+        {
+            if (this->_spaceships[j])
+                delete this->_spaceships[j];
+        }
+        for (int j = 0; j < NB_ALIENS; j++)
+        {
+            if (this->_aliens[j])
+                delete this->_aliens[j];
+        }
+        for (int j = 0; j < NB_BIGALIENS; j++)
+        {
+            if (this->_bigaliens[j])
+                delete this->_bigaliens[j];
+        }
 }
 
 void World::checkEnemyProjectiles(Alien **aliens)

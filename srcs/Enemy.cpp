@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:59:49 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:49:58 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:45:49 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,14 @@ Enemy::Enemy(std::string name, int health, char enemyChar) : Agent(name, health)
 
 Enemy::~Enemy()
 {
- 
+    for (int i = 0; i < NB_PROJ; i++)
+    {
+        if (this->_projectile[i])
+        {
+         delete this->_projectile[i];
+         this->_projectile[i] = NULL;
+        }
+    }
 }
 
 char Enemy::getEnemyChar()
