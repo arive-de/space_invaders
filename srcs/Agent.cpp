@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:18 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 14:16:28 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 16:45:49 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int     Agent::getHealth()
     return this->_health;
 }
 
+void     Agent::setHealth(int h)
+{
+    this->_health = h;
+}
+
 int     Agent::getProjecSpeed()
 {
     return this->_projecSpeed;
@@ -51,7 +56,8 @@ void     Agent::incremXPosition()
 
 void     Agent::incremYPosition()
 {
-    this->_y++;
+    if (this->_y < W_Y - 1)
+        this->_y++;
 }
 
 void     Agent::decremXPosition()
@@ -61,7 +67,8 @@ void     Agent::decremXPosition()
 
 void     Agent::decremYPosition()
 {
-    this->_y--;
+    if (this->_y > 0)
+        this->_y--;
 }
 
 void     Agent::decremNbProj()

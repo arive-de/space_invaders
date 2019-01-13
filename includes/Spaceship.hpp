@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Enemy.hpp                                          :+:      :+:    :+:   */
+/*   Spaceship.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/01/12 11:29:11 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 15:52:50 by fmaury           ###   ########.fr       */
+/*   Created: 2019/01/13 15:27:55 by fmaury            #+#    #+#             */
+/*   Updated: 2019/01/13 15:36:35 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-#ifndef ENEMY_HPP
-#define ENEMY_HPP
+#ifndef SPACESHIP_HPP
+#define SPACESHIP_HPP
 
 #include <string>
-#include "Agent.hpp"
+#include "Enemy.hpp"
 
-class Enemy : public Agent {
+class Spaceship : public Enemy {
     public :
-        Enemy();
-        Enemy(std::string name, int health, char enemyChar);
-        ~Enemy();
-        char            getEnemyChar();
+        Spaceship();
+        ~Spaceship();
         void            takeDamage(size_t damage);
 
     protected:
 
     private:
-        Enemy	&operator=(const Enemy &);
-		Enemy(const Enemy &);
-        char    _enemyChar;
+        Spaceship	&operator=(const Spaceship &);
+		Spaceship(const Enemy &);
 
 };
 
