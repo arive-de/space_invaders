@@ -80,6 +80,7 @@ int main(void) {
             box(win, 0, 0);
             draw_grid(win, world);
             mvwprintw(win, 0, 2, " score: %d ", score++);
+			mvwprintw(win, 0, 12, " pv: %d ", player->getHealth());
             if (player->getHealth() <= 0)
             {
                 score = 0;
