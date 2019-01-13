@@ -56,7 +56,7 @@ void     Agent::incremXPosition()
 
 void     Agent::incremYPosition()
 {
-    if (this->_y < W_Y - 1)
+    if (this->_y < W_Y - 2)
         this->_y++;
 }
 
@@ -67,7 +67,7 @@ void     Agent::decremXPosition()
 
 void     Agent::decremYPosition()
 {
-    if (this->_y > 0)
+    if (this->_y > 1)
         this->_y--;
 }
 
