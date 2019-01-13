@@ -5,14 +5,13 @@
 #                                                     +:+ +:+         +:+      #
 #    By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/11/09 18:11:43 by zweng             #+#    #+#              #
-#    Updated: 2019/01/13 19:26:22 by fmaury           ###   ########.fr        #
+#    Created: 2019/01/13 20:12:00 by fmaury            #+#    #+#              #
+#    Updated: 2019/01/13 20:12:03 by fmaury           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = clang++
 
-# ----- part to change -----
 
 NAME 			= ft_retro
 
@@ -34,13 +33,11 @@ OBJ_PATH =  obj
 OBJ_NAME =  $(SRC_NAME:.cpp=.o)
 CPPFLAGS = -I$(HEADER_PATH) 
 LIBFLAG = -lncurses
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror 
 
-# ----- part automatic -----
 SRCS := $(addprefix $(SRC_PATH)/,$(SRC_NAME))
 OBJS := $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
 
-# ----- Colors -----
 BLACK:="\033[1;30m"
 RED:="\033[1;31m"
 GREEN:="\033[1;32m"
@@ -48,9 +45,7 @@ CYAN:="\033[1;35m"
 PURPLE:="\033[1;36m"
 WHITE:="\033[1;37m"
 EOC:="\033[0;0m"
-#  # ==================
 
-# ----- part rules -----
 
 all: $(NAME)
 
