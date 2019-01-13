@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:10:50 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 18:29:52 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 10:18:22 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ class World {
         void            checkPlayerProjectiles();
         void            getAgentPosition(Player& player);
         void            getAgentPosition(Enemy& enemy);
+        char            getCharGrid(int y, int x);
+        void            printEnemy();
+
 
     protected:
         char             _grid[W_Y][W_X];

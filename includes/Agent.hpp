@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:56:24 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 18:37:19 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 10:53:00 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 #define W_Y 40
 #define W_X 150
 
+#define NB_ENMY 50
+#define NB_PROJ 5
+
 class Agent {
     public :
         Agent();
@@ -31,6 +34,10 @@ class Agent {
         int  getYPosition();
         void  incremXPosition();
         void  incremYPosition();
+        void  decremXPosition();
+        void  decremYPosition();
+        int   getHealth();
+
     protected:
         std::string     _name;
         size_t          _health;

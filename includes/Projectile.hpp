@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:42:50 by zweng             #+#    #+#             */
-/*   Updated: 2019/01/12 14:59:27 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 09:51:51 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ class Projectile {
 		void	setY(int);
 
     protected:
-        int dir_speed;
         int posX;
         int posY;
+        int dir_speed;
 
     private:
         Projectile();

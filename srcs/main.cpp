@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 15:59:08 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 10:58:38 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,129 @@
 #include "../includes/Enemy.hpp"
 #include "../includes/World.hpp"
 
-int main()
+#include <ncurses.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <unistd.h>
+
+# define UP 119
+# define DOWN 115
+# define WALL '#'
+# define PLAYER '>'
+
+// enum colide = {"#", "", "", "", ""};
+
+// void winsize(int *y, int *x){
+// 	getmaxyx(stdscr, (*y), (*x));
+// }
+
+void		draw_grid(WINDOW *win, World *world){
+
+    for (int y = 0; y < W_Y; y++)
+        for (int x = 0; x < W_X; x++)
+	        mvwaddch(win, y, x, world->getCharGrid(y, x));
+
+}
+
+// bool		collision(WINDOW *win, int pos_y, int pos_x) {
+
+
+// 	int	mvch = mvwinch(win, pos_y, pos_x);
+
+// 	return ( mvch == WALL ?  true : false);
+// }
+
+bool duration(std::clock_t *_start)
 {
+    std::clock_t duration = (std::clock() - *_start);
+
+    if (duration > 60000)
+    {
+        *_start = std::clock();
+        return true;
+    }
+    return false;
+}
+
+int main(void) {
+
+	initscr();
+	cbreak();
+	noecho();
+    curs_set(0);
+
+	// int		pos_x(1);
+	// int		pos_y(W_Y / 2);
+
+	int		keycode;
+	struct timespec ts;
+    std::srand(0);
+
     Player *player = new Player("John");
-    Enemy *enemy[50];
-    for (int i = 0; i < 50; i++)
+    Enemy *enemy[NB_ENMY];
+    for (int i = 0; i < NB_ENMY; i++)
         enemy[i] = new Enemy("Spaceship");
     World *world = new World(*player, enemy);
 
+	ts.tv_sec = 0;
+	ts.tv_nsec = 50 * 1000 * 1000;
+	// winsize(&win_y, &win_x);
 
-    return 0;
+	WINDOW *win = newwin(40, 150, 0, 0);
+
+	keypad(win, TRUE);
+	nodelay(win, TRUE);
+
+
+	std::clock_t c_start = std::clock();
+
+    std::srand(0);
+	while (1)
+	{
+		if (duration(&c_start)) {
+			wclear(win);
+			box(win, 0, 0);
+			draw_grid(win, world);
+            if (player->getHealth() <= 0)
+            {
+                wprintw(win, "GAME OVER");
+                wrefresh(win);
+                sleep(100);
+            }
+            world->makeTheRules();
+			// wmove(win, pos_y, pos_x);
+			wrefresh(win);
+
+		}
+		if ((keycode = wgetch(win)) == ERR)
+			continue;
+		else if (keycode == 'w')
+		{
+           	// if (!collision(win, pos_y - 1, pos_x))
+           	// 	pos_y--;
+               player->decremYPosition();
+        }
+        else if (keycode == 's')
+        {
+            // if (!collision(win, pos_y + 1, pos_x))
+			// 	pos_y++;
+               player->incremYPosition();
+
+        }
+		else if(keycode == 'a')
+		{
+			// if (!collision(win, pos_y, pos_x - 1))
+            // 	pos_x--;
+            //    player->incremXPosition();
+
+		}
+		else if (keycode == 'd')
+		{
+			// if (!collision(win, pos_y, pos_x + 1))
+            // 	pos_x++;
+		}
+	}
+	endwin();
+	return 0;
 }

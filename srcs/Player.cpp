@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 11:29:14 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/12 15:43:19 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 10:52:02 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 Player::Player(std::string name) : Agent(name, 5)
 {
-    this->_x = 0;
-    this->_y = 5;
+    this->_x = 1;
+    this->_y = W_Y / 2;
     this->_projecSpeed = 2;
+}
+
+Player::~Player()
+{
+
 }
 
 void Player::replay(bool r)
@@ -32,19 +37,16 @@ void Player::replay(bool r)
 void Player::takeDamage(size_t dmg)
 {
     std::string buf;
-    if (dmg < this->_health)
-    {
-        this->_health -= dmg;
-    }
-    else
-    {
-        std::cout << "REPLAY? y/n" << std::endl;
-        getline(std::cin, buf);
-        if (buf == "y")
-            replay(true);
-        else
-            replay(false);
-    }
+    this->_health -= dmg;
+    // else
+    // {
+    //     std::cout << "REPLAY? y/n" << std::endl;
+    //     getline(std::cin, buf);
+    //     if (buf == "y")
+    //         replay(true);
+    //     else
+    //         replay(false);
+    // }
 }
 
 
