@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 18:25:31 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:07:16 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void World::checkEnemyProjectiles(Alien **aliens)
                 aliens[i]->decremXPosition();
                 if (aliens[i]->getXPosition() == this->_player.getXPosition() && aliens[i]->getYPosition() == this->_player.getYPosition())
                 {
-                    this->_player.takeDamage(5000);
+                    // this->_player.takeDamage(5000);
+                    this->_player.setHealth(0);
                     return ;
                 }
                 for (int j = 0; j < NB_PROJ; j++)
@@ -110,7 +111,8 @@ void World::checkEnemyProjectiles(Spaceship       **spaceships)
                 spaceships[i]->decremXPosition();
                 if (spaceships[i]->getXPosition() == this->_player.getXPosition() && spaceships[i]->getYPosition() == this->_player.getYPosition())
                 {
-                    this->_player.takeDamage(5000);
+                    // this->_player.takeDamage(5000);
+                    this->_player.setHealth(0);
                     return ;
                 }
                 for (int j = 0; j < NB_PROJ; j++)
@@ -248,14 +250,12 @@ void World::makeTheRules()
     for (int i = 0; i < W_Y; i++)
         for (int j = 0; j < W_X; j++)
             this->_grid[i][j] = ' ';
-
     for (int j = 0; j < W_X; j++)
     {
         num = rand() % 10;
         for (int i = W_Y - num; i < W_Y; i++)
             this->_grid[i][j] = '+';
     }
-
     this->checkEnemyProjectiles(this->_aliens);
     this->checkEnemyProjectiles(this->_spaceships);
     this->checkPlayerProjectiles();
