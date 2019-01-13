@@ -22,7 +22,7 @@
 
 #define NB_ALIENS 20
 #define NB_SPACESHIPS 30
-#define NB_PROJ 5
+#define NB_PROJ 20
 
 class Agent {
     public :

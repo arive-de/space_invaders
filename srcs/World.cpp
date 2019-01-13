@@ -66,7 +66,7 @@ void World::checkEnemyProjectiles(Alien **aliens)
                         x = aliens[i]->_projectile[j]->getX();
                         if (y == this->_player.getYPosition() && x - aliens[i]->getProjecSpeed() <= 0)
                         {
-                            this->_player.takeDamage(5);
+                            this->_player.takeDamage(1);
                             aliens[i]->decremNbProj();
                             delete aliens[i]->_projectile[j];
                             aliens[i]->_projectile[j] = NULL;
@@ -121,7 +121,7 @@ void World::checkEnemyProjectiles(Spaceship       **spaceships)
                         x = spaceships[i]->_projectile[j]->getX();
                         if (y == this->_player.getYPosition() && x - spaceships[i]->getProjecSpeed() <= 0)
                         {
-                            this->_player.takeDamage(5);
+                            this->_player.takeDamage(1);
                             spaceships[i]->decremNbProj();
                             delete spaceships[i]->_projectile[j];
                             spaceships[i]->_projectile[j] = NULL;
