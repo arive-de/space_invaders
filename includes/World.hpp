@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:10:50 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:50:20 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:28:56 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <string>
 #include "Player.hpp"
 #include "Alien.hpp"
+#include "BigAlien.hpp"
 #include "Spaceship.hpp"
 
 #define W_Y 40
@@ -24,11 +25,12 @@
 class World {
 
     public :
-        World(Player &player, Spaceship **spaceships, Alien **aliens);
+        World(Player &player, Spaceship **spaceships, Alien **aliens, BigAlien **bigaliens);
         ~World();
         void            makeTheRules();
         void            checkEnemyProjectiles(Alien **_aliens);
         void            checkEnemyProjectiles(Spaceship **_spaceships);
+        void            checkEnemyProjectiles(BigAlien **_aliens);
         void            checkPlayerProjectiles();
         void            getAgentPosition(Player& player);
         void            getAgentPosition(Enemy& enemy);
@@ -40,6 +42,7 @@ class World {
         Player          &_player;
         Spaceship       **_spaceships;
         Alien           **_aliens;
+        BigAlien        **_bigaliens;
 
     private:
 };

@@ -6,13 +6,14 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 12:14:39 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 17:44:36 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:30:16 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/Player.hpp"
 #include "../includes/Spaceship.hpp"
 #include "../includes/Alien.hpp"
+#include "../includes/BigAlien.hpp"
 #include "../includes/World.hpp"
 
 #include <ncurses.h>
@@ -61,7 +62,10 @@ int main(void) {
 	Alien *aliens[NB_ALIENS];
     for (int i = 0; i < NB_ALIENS; i++)
         aliens[i] = new Alien();
-    World *world = new World(*player, spaceships, aliens);
+	BigAlien *bigAliens[NB_BIGALIENS];
+    for (int i = 0; i < NB_BIGALIENS; i++)
+        bigAliens[i] = new BigAlien();
+    World *world = new World(*player, spaceships, aliens, bigAliens);
 
     WINDOW *win = newwin(40, 150, 0, 0);
     WINDOW *win_end;
@@ -107,7 +111,10 @@ int main(void) {
 			Alien *aliens[NB_ALIENS];
     		for (int i = 0; i < NB_ALIENS; i++)
         		aliens[i] = new Alien();
-    		world = new World(*player, spaceships, aliens);
+			BigAlien *bigAliens[NB_BIGALIENS];
+    		for (int i = 0; i < NB_BIGALIENS; i++)
+       			 bigAliens[i] = new BigAlien();
+    		world = new World(*player, spaceships, aliens, bigAliens);
            
         }
         else if (keycode == 'n')

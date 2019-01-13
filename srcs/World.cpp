@@ -6,13 +6,13 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 10:00:59 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 19:07:16 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:36:27 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/World.hpp"
 
-World::World(Player &player, Spaceship **spaceships, Alien **aliens) : _player(player), _spaceships(spaceships), _aliens(aliens)
+World::World(Player &player, Spaceship **spaceships, Alien **aliens, BigAlien **bigaliens) : _player(player), _spaceships(spaceships), _aliens(aliens), _bigaliens(bigaliens)
 {
     for (int i = 0; i < W_Y; i++)
         for (int j = 0; j < W_X; j++)
@@ -29,6 +29,14 @@ World::World(Player &player, Spaceship **spaceships, Alien **aliens) : _player(p
             if (this->_aliens[j]->getYPosition() < W_Y && this->_aliens[j]->getXPosition() < W_X)
                 this->_grid[this->_aliens[j]->getYPosition()][this->_aliens[j]->getXPosition()] = this->_aliens[j]->getEnemyChar();
         }
+        for (int j = 0; j < NB_BIGALIENS; j++)
+        {
+            if (this->_bigaliens[j]->getYPosition() < W_Y && this->_bigaliens[j]->getXPosition() < W_X)
+            {
+                this->_grid[this->_bigaliens[j]->getYPosition()][this->_bigaliens[j]->getXPosition()] = this->_bigaliens[j]->getEnemyChar();
+                this->_grid[this->_bigaliens[j]->getYPosition()][this->_bigaliens[j]->getXPosition() + 1] = 'A';
+            }
+        }
 }
 
 World::~World()
@@ -42,6 +50,62 @@ void World::checkEnemyProjectiles(Alien **aliens)
     int y(0);
 
     for (int i = 0; i < NB_ALIENS; i++)
+    {
+        if (aliens[i])
+        {
+            if (aliens[i]->getXPosition() - 1 <= 0)
+            {
+                delete aliens[i];
+                aliens[i] = NULL;
+            }
+            else
+            {
+                aliens[i]->decremXPosition();
+                if (aliens[i]->getXPosition() == this->_player.getXPosition() && aliens[i]->getYPosition() == this->_player.getYPosition())
+                {
+                    // this->_player.takeDamage(5000);
+                    this->_player.setHealth(0);
+                    return ;
+                }
+                for (int j = 0; j < NB_PROJ; j++)
+                {
+                    if (aliens[i]->_projectile[j])
+                    {
+                        y = aliens[i]->_projectile[j]->getY();
+                        x = aliens[i]->_projectile[j]->getX();
+                        if (y == this->_player.getYPosition() && x - aliens[i]->getProjecSpeed() <= 0)
+                        {
+                            this->_player.takeDamage(1);
+                            aliens[i]->decremNbProj();
+                            delete aliens[i]->_projectile[j];
+                            aliens[i]->_projectile[j] = NULL;
+                        }
+                        else if (x - aliens[i]->getProjecSpeed() <= 0)
+                        {
+                            aliens[i]->decremNbProj();
+                            delete aliens[i]->_projectile[j];
+                            aliens[i]->_projectile[j] = NULL;
+                        }
+                        else 
+                        {
+                            aliens[i]->_projectile[j]->setX(x - aliens[i]->getProjecSpeed());
+                            this->_grid[y][x] = '-';
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    this->_grid[this->_player.getYPosition()][this->_player.getXPosition()] = '>';
+}
+
+void World::checkEnemyProjectiles(BigAlien **aliens)
+{
+    int x(0);
+    int y(0);
+
+    for (int i = 0; i < NB_BIGALIENS; i++)
     {
         if (aliens[i])
         {
@@ -189,6 +253,33 @@ void            World::checkPlayerProjectiles()
                     }
                 }
             }
+            for (int j = 0; j < NB_BIGALIENS; j++)
+            {
+                if (this->_bigaliens[j])
+                {
+                    if (x + 1 == W_X)
+                    {
+                        delete this->_player._projectile[i];
+                        this->_player._projectile[i] = NULL;
+                        this->_player.decremNbProj();
+                        break ;
+                    }
+                    else if (y == this->_bigaliens[j]->getYPosition() && (x == this->_bigaliens[j]->getXPosition() || x + 1 == this->_bigaliens[j]->getXPosition()))
+                    {
+                        delete this->_player._projectile[i];
+                        this->_player._projectile[i] = NULL;
+                        this->_player.decremNbProj();
+                        this->_bigaliens[j]->setHealth(this->_bigaliens[j]->getHealth() - 1);
+                        if (this->_bigaliens[j]->getHealth() <= 0)
+                        {
+                            this->_grid[this->_bigaliens[j]->getYPosition()][this->_bigaliens[j]->getXPosition()] = '*';
+                            delete this->_bigaliens[j];
+                            this->_bigaliens[j] = NULL;
+                        }
+                        break ;
+                    }
+                }
+            }
             for (int j = 0; j < NB_SPACESHIPS; j++)
             {
                 if (this->_spaceships[j])
@@ -235,6 +326,17 @@ void World::printEnemy()
         if (!this->_aliens[i])
             this->_aliens[i] = new Alien();
     }
+    for (int i = 0; i < NB_BIGALIENS; i++)
+    {
+        if (this->_bigaliens[i] && this->_bigaliens[i]->getXPosition() < W_X)
+        {
+            this->_grid[this->_bigaliens[i]->getYPosition()][this->_bigaliens[i]->getXPosition()] = this->_bigaliens[i]->getEnemyChar();
+            if (this->_bigaliens[i]->getXPosition() + 1 < W_X)
+                this->_grid[this->_bigaliens[i]->getYPosition()][this->_bigaliens[i]->getXPosition() + 1] = 'A';
+        }
+        if (!this->_bigaliens[i])
+            this->_bigaliens[i] = new BigAlien();
+    }
     for (int i = 0; i < NB_SPACESHIPS; i++)
     {
         if (this->_spaceships[i] && this->_spaceships[i]->getXPosition() < W_X)
@@ -257,6 +359,7 @@ void World::makeTheRules()
             this->_grid[i][j] = '+';
     }
     this->checkEnemyProjectiles(this->_aliens);
+    this->checkEnemyProjectiles(this->_bigaliens);
     this->checkEnemyProjectiles(this->_spaceships);
     this->checkPlayerProjectiles();
     this->printEnemy();
@@ -266,6 +369,14 @@ void World::makeTheRules()
         {
             if (rand() % 250 == 1)
             this->_aliens[i]->fireProjectile(this->_aliens[i]->getYPosition(), this->_aliens[i]->getXPosition() - 1);
+        }
+    }
+    for (int i = 0; i < NB_BIGALIENS; i++)
+    {
+        if (this->_bigaliens[i] && this->_bigaliens[i]->getXPosition() < W_X)
+        {
+            if (rand() % 250 == 1)
+            this->_bigaliens[i]->fireProjectile(this->_bigaliens[i]->getYPosition(), this->_bigaliens[i]->getXPosition() - 1);
         }
     }
     for (int i = 0; i < NB_SPACESHIPS; i++)

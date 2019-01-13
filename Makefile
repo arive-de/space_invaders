@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zweng <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/09 18:11:43 by zweng             #+#    #+#              #
-#    Updated: 2019/01/13 18:53:26 by arive-de         ###   ########.fr        #
+#    Updated: 2019/01/13 19:26:22 by fmaury           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRC_PATH 		= srcs
 
 SRC_NAME		= Agent.cpp\
 				  Alien.cpp\
+				  BigAlien.cpp\
 				  Enemy.cpp\
 				  Player.cpp\
 				  Projectile.cpp\

@@ -6,7 +6,7 @@
 /*   By: fmaury <fmaury@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/12 09:56:24 by fmaury            #+#    #+#             */
-/*   Updated: 2019/01/13 16:49:21 by fmaury           ###   ########.fr       */
+/*   Updated: 2019/01/13 19:19:08 by fmaury           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 #define W_Y 40
 #define W_X 150
 
-#define NB_ALIENS 20
+#define NB_ALIENS 15
+#define NB_BIGALIENS 5
 #define NB_SPACESHIPS 30
 #define NB_PROJ 20
 
