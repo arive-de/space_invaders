@@ -39,6 +39,11 @@ int     Agent::getHealth()
     return this->_health;
 }
 
+void     Agent::setHealth(int health)
+{
+    this->_health = health;
+}
+
 int     Agent::getProjecSpeed()
 {
     return this->_projecSpeed;

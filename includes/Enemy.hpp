@@ -22,7 +22,7 @@ class Enemy : public Agent {
         Enemy();
         Enemy(std::string name);
         ~Enemy();
-        void            takeDamage(size_t damage);
+        void            takeDamage(int damage);
 
     protected:
 

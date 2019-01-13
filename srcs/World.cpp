@@ -26,6 +26,10 @@ World::World(Player &player, Enemy **enemy) : _player(player), _enemy(enemy)
         }
 }
 
+World::~World() {
+    
+}
+
 void World::checkEnemyProjectiles()
 {
     int x(0);

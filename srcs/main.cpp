@@ -28,23 +28,23 @@
 // enum colide = {"#", "", "", "", ""};
 
 // void winsize(int *y, int *x){
-// 	getmaxyx(stdscr, (*y), (*x));
+//     getmaxyx(stdscr, (*y), (*x));
 // }
 
-void		draw_grid(WINDOW *win, World *world){
+void        draw_grid(WINDOW *win, World *world){
 
-    for (int y = 0; y < W_Y; y++)
-        for (int x = 0; x < W_X; x++)
-	        mvwaddch(win, y, x, world->getCharGrid(y, x));
+    for (int y = 1; y < W_Y-1; y++)
+        for (int x = 1; x < W_X-1; x++)
+            mvwaddch(win, y, x, world->getCharGrid(y, x));
 
 }
 
-// bool		collision(WINDOW *win, int pos_y, int pos_x) {
+// bool        collision(WINDOW *win, int pos_y, int pos_x) {
 
 
-// 	int	mvch = mvwinch(win, pos_y, pos_x);
+//     int    mvch = mvwinch(win, pos_y, pos_x);
 
-// 	return ( mvch == WALL ?  true : false);
+//     return ( mvch == WALL ?  true : false);
 // }
 
 bool duration(std::clock_t *_start)
@@ -61,14 +61,13 @@ bool duration(std::clock_t *_start)
 
 int main(void) {
 
-	initscr();
-	cbreak();
-	noecho();
+    initscr();
+    cbreak();
+    noecho();
     curs_set(0);
 
-	int		keycode;
-	struct timespec ts;
-    std::srand(0);
+    int keycode;
+    int score;
 
     Player *player = new Player("John");
     Enemy *enemy[NB_ENMY];
@@ -76,48 +75,64 @@ int main(void) {
         enemy[i] = new Enemy("Spaceship");
     World *world = new World(*player, enemy);
 
-	ts.tv_sec = 0;
-	ts.tv_nsec = 50 * 1000 * 1000;
+    WINDOW *win = newwin(40, 150, 0, 0);
+    WINDOW *win_end;
 
-	WINDOW *win = newwin(40, 150, 0, 0);
-
-	keypad(win, TRUE);
-	nodelay(win, TRUE);
+    keypad(win, TRUE);
+    nodelay(win, TRUE);
 
 
-	std::clock_t c_start = std::clock();
+    std::clock_t c_start = std::clock();
 
     std::srand(0);
-	while (1)
-	{
-		if (duration(&c_start)) {
-			wclear(win);
-			box(win, 0, 0);
-			draw_grid(win, world);
+    while (1)
+    {
+        if (duration(&c_start)) {
+            wclear(win);
+            box(win, 0, 0);
+            draw_grid(win, world);
+            mvwprintw(win, 0, 2, " score: %d ", score++);
             if (player->getHealth() <= 0)
             {
-                wprintw(win, "GAME OVER");
-                wrefresh(win);
-                sleep(100);
+                score = 0;
+                win_end = subwin(win, 5, 31, W_Y / 2 - 2.5, W_X / 2 - 15.5);
+				box(win_end, 0, 0);
+                mvwprintw(win, W_Y / 2 - 1, W_X / 2 - 12.5, "GAME OVER, continue ? Y/n");
+                wrefresh(win_end);
             }
             world->makeTheRules();
-			wrefresh(win);
-
-		}
-		if ((keycode = wgetch(win)) == ERR)
-			continue;
-		else if (keycode == 'w')
+            wrefresh(win);
+        }
+        if ((keycode = wgetch(win)) == ERR)
+            continue;
+        else if (keycode == 'y')
+        {
+			score = 0;
+            player->setHealth(5);
+			if (win_end != NULL) {
+				delwin(win_end);
+			}
+            delete world;
+            for (int i = 0; i < NB_ENMY; i++)
+                enemy[i] = new Enemy("Spaceship");
+            world = new World(*player, enemy);
+           
+        }
+        else if (keycode == 'n')
+        {
+            delete player;
+            delete world;
+            delwin(win);
+            endwin();
+            return 0;
+        }
+        else if (keycode == 'w')
                player->decremYPosition();
         else if (keycode == 's')
                player->incremYPosition();
-		else if(keycode == 'e')
+        else if(keycode == ' ')
             player->fireProjectile(player->getYPosition(), player->getXPosition());
-		else if (keycode == 'd')
-		{
-			// if (!collision(win, pos_y, pos_x + 1))
-            // 	pos_x++;
-		}
-	}
-	endwin();
-	return 0;
+    }
+    endwin();
+    return 0;
 }

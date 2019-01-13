@@ -39,11 +39,12 @@ class Agent {
         int   getProjecSpeed();
         void  decremNbProj();
         int   getHealth();
+        void  setHealth(int health);
         Projectile      *_projectile[NB_PROJ];
 
     protected:
         std::string     _name;
-        size_t          _health;
+        int          _health;
         int             _projecSpeed;
         int             _x;
         int             _y;

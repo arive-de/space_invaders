@@ -24,7 +24,7 @@ Enemy::~Enemy()
  
 }
 
-void Enemy::takeDamage(size_t dmg)
+void Enemy::takeDamage(int dmg)
 {
     std::string buf;
 
