@@ -108,10 +108,8 @@ int main(void) {
             delete world;
             for (int i = 0; i < NB_SPACESHIPS; i++)
         		spaceships[i] = new Spaceship();
-			Alien *aliens[NB_ALIENS];
     		for (int i = 0; i < NB_ALIENS; i++)
         		aliens[i] = new Alien();
-			BigAlien *bigAliens[NB_BIGALIENS];
     		for (int i = 0; i < NB_BIGALIENS; i++)
        			 bigAliens[i] = new BigAlien();
     		world = new World(*player, spaceships, aliens, bigAliens);
