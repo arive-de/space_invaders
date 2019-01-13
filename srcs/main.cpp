@@ -22,14 +22,6 @@
 
 # define UP 119
 # define DOWN 115
-# define WALL '#'
-# define PLAYER '>'
-
-// enum colide = {"#", "", "", "", ""};
-
-// void winsize(int *y, int *x){
-//     getmaxyx(stdscr, (*y), (*x));
-// }
 
 void        draw_grid(WINDOW *win, World *world){
 
@@ -38,14 +30,6 @@ void        draw_grid(WINDOW *win, World *world){
             mvwaddch(win, y, x, world->getCharGrid(y, x));
 
 }
-
-// bool        collision(WINDOW *win, int pos_y, int pos_x) {
-
-
-//     int    mvch = mvwinch(win, pos_y, pos_x);
-
-//     return ( mvch == WALL ?  true : false);
-// }
 
 bool duration(std::clock_t *_start)
 {
